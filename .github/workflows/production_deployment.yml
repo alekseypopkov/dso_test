@@ -15,10 +15,10 @@ jobs:
           # Optional
           git-clone-by: ssh
           target-branch: develop
-          target-directory: /opt/dvna_2509/
-          pre-command: | # multi-line script possible
- cd /opt/dvna_2509/;
- docker-compose down -v --remove-orphans;
- sh stop.sh
-          post-command: sh startup.sh
+          target-directory: /opt/dso_test/
+          #pre-command: | # multi-line script possible
+# cd /opt/dvna_2509/;
+# docker-compose down -v --remove-orphans;
+# sh stop.sh
+#          post-command: sh startup.sh
  #docker-compose up -d -V --force-recreate
