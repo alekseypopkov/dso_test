@@ -1,0 +1,24 @@
+name: Production dvna_2509
+on:
+ push:
+ branches: [main, develop]
+jobs:
+ deploy:
+ runs-on: ubuntu-latest
+    steps:
+ - uses: Rxinui/ssh-deploy-repo-action@v1.1
+        with:
+ # Required
+          ssh-user: root
+          ssh-password: ${{ secrets.NETOLOGY_SERVER_DATA }}
+          ssh-domain: ${{ secrets.OVH_HOSTING_DOMAIN }}
+          # Optional
+          git-clone-by: ssh
+          target-branch: develop
+          target-directory: /opt/dvna_2509/
+          pre-command: | # multi-line script possible
+ cd /opt/dvna_2509/;
+ docker-compose down -v --remove-orphans;
+ sh stop.sh
+          post-command: sh startup.sh
+ #docker-compose up -d -V --force-recreate
