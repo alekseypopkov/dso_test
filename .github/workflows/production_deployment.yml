@@ -1,7 +1,7 @@
-name: Deploy
-on:
+on: Deploy dso-test
   push:
-    branches: [main]
+    branches:
+      - main
 jobs:
   deploy:
     runs-on: ubuntu-latest
