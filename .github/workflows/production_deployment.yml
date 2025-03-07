@@ -1,13 +1,19 @@
+<<<<<<< HEAD
 name: Production dso-test
+=======
+name: Deploy
+>>>>>>> 0b91f65 (ssh root)
 on:
- push:
- branches: [main, develop]
+  push:
+    branches: [main]
 jobs:
- deploy:
- runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
     steps:
- - uses: Rxinui/ssh-deploy-repo-action@v1.1
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.9.0
         with:
+<<<<<<< HEAD
  # Required
           ssh-user: alex
           ssh-password: ${{ secrets.NETOLOGY_SERVER_ALEX }}
@@ -22,3 +28,12 @@ jobs:
 # sh stop.sh
 #          post-command: sh startup.sh
 #docker-compose up -d -V --force-recreate
+=======
+          ssh-priva
+te-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Run bash script via ssh
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "bash ${{ secrets.PATH_TO_SCRIPT }}"
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+>>>>>>> 0b91f65 (ssh root)
