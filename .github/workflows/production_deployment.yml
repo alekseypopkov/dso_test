@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-name: Production dso-test
-=======
 name: Deploy
->>>>>>> 0b91f65 (ssh root)
 on:
   push:
     branches: [main]
@@ -13,22 +9,6 @@ jobs:
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
-<<<<<<< HEAD
- # Required
-          ssh-user: alex
-          ssh-password: ${{ secrets.NETOLOGY_SERVER_ALEX }}
-          ssh-domain: ${{ secrets.OVH_HOSTING_DOMAIN }}
-          # Optional
-          git-clone-by: ssh
-          target-branch: develop
-          target-directory: ~/
-          pre-command: | # multi-line script possible
- cd ~/; sh deploy.sh
-# docker-compose down -v --remove-orphans;
-# sh stop.sh
-#          post-command: sh startup.sh
-#docker-compose up -d -V --force-recreate
-=======
           ssh-priva
 te-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Run bash script via ssh
@@ -36,4 +16,3 @@ te-key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "bash ${{ secrets.PATH_TO_SCRIPT }}"
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
->>>>>>> 0b91f65 (ssh root)
