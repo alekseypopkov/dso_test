@@ -1,5 +1,6 @@
 node_modules/
 docs/_book
+*.tar
 npm-debug.log
 package-lock.json
 .dev/
