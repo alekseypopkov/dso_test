@@ -21,4 +21,4 @@ jobs:
 # docker-compose down -v --remove-orphans;
 # sh stop.sh
 #          post-command: sh startup.sh
- #docker-compose up -d -V --force-recreate
+#docker-compose up -d -V --force-recreate
