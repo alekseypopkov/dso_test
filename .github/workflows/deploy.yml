@@ -16,4 +16,4 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: | 
-            bash ${{ secrets.PATH_TO_SCRIPT }}
+            sh ${{ secrets.PATH_TO_SCRIPT }}
