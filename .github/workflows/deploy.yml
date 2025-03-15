@@ -9,8 +9,6 @@ jobs:
     steps:
       - uses: kehoe/validate-configs-action@v4.0.1
 
-jobs:
-
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
