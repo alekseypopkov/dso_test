@@ -9,9 +9,6 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: kehoe/validate-configs-action@v4.0.1
-
-    steps:
       - name: SSH Deploy
         uses: appleboy/ssh-action@master
         with:
