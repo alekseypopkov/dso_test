@@ -23,7 +23,7 @@ jobs:
           zap_options: '-X quickstart'
 
       - name: Upload results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: zap-report
           path: zap/results/*.xml
