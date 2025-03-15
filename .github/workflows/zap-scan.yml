@@ -1,0 +1,29 @@
+name: OWASP ZAP Scan
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up ZAP
+        uses: zaproxy/action-full-scan@v0.2.0
+        with:
+          target: 'http://217.18.61.156:9090/'
+          zap_options: '-X quickstart'
+
+      - name: Upload results
+        uses: actions/upload-artifact@v2
+        with:
+          name: zap-report
+          path: zap/results/*.xml
