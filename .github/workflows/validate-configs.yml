@@ -13,3 +13,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: kehoecj/validate-configs-action@v4
+      with:
+        reporter: "json"
