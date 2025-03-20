@@ -10,6 +10,6 @@ on:
 
 jobs:
  validate-config-files:
- runs-on: ubuntu-latest
- steps:
-  - uses: kehoe/validate-configs-action@v4.0.1
+    runs-on: ubuntu-latest
+    steps:
+        - uses: kehoe/validate-configs-action@v4.0.1
