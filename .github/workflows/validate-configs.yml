@@ -14,6 +14,5 @@ jobs:
     steps:
       - uses: kehoecj/validate-configs-action@v4
         with:
-            name: Validate Tests
-            path: reports/validate-*.json
+            depth: 0
             reporter: "json"
