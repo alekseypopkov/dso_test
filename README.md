@@ -26,7 +26,7 @@
 2. В качестве примера для реализации Задачи взят проект https://github.com/appsecco/dvna. Использован один из трех вариантов - официальный образ. Docker.Damn Vulnerable NodeJS Application (DVNA) — это простое приложение NodeJS, демонстрирующее 10 основных уязвимостей по версии OWASP и содержащее рекомендации по устранению и предотвращению этих уязвимостей. Приложение работает на основе часто используемых библиотек, таких как express, passport, sequelize и т. д. С использованием клонирования создан публичный репозиторий Dso_test.
 2.1. Клонируем репозиторий, и настраиваем репозиторий:
 
-Клонируем репозиторий
+Клонируем репозиторий https://github.com/appsecco/dvna на свое АРМ
 
 ```bash
 git clone https://github.com/appsecco/dvna; cd dvna
@@ -57,7 +57,7 @@ docker run --rm --name dvna-app --env-file vars.env --link dvna-mysql:mysql-db -
 
 Проверяем работоспособность приложения по адресу http://127.0.0.1:9090/
 
-2.2. Поизводим переименование репозитория в Dso_test; Удаляем скрытую директорию .git; Создаем в своей учетной записи на github соответствующий репозиторий Dso_test
+2.2. Производим переименование репозитория в Dso_test; Удаляем скрытую директорию .git; Создаем в своей учетной записи на github соответствующий репозиторий Dso_test
 
 Инициализируем git репозиторий в Dso_test
 
@@ -79,10 +79,74 @@ git push origin main
 
 
 
-2.3.
+2.3. Настраиваем сервер
+
+Клонируем подготовленный репозиторий на сервер в директорию /root; копируем его в директорию /opt и запускаем сервис
+
+Запускаем контейнер MySQL
+
+```bash
+docker run --rm --name dvna-mysql --env-file vars.env -d mysql:5.7
+```
+
+Запускаем приложение, используя официальный образ
+
+```bash
+docker run --rm --name dvna-app --env-file vars.env --link dvna-mysql:mysql-db -p 9090:9090 appsecco/dvna
+```
+
+Возвращаемся в директорию /root; создаем скрипт deploy.sh следующего содержания
+
+```bash
+#!/bin/bash
+
+#Stop docker
+cd /opt/dso_test/
+sudo docker stop $(sudo docker ps -aq)
+
+# Удаляем service
+rm -rf /opt/dso_test
+# Clone the repo
+cd ~/
+git clone git@github.com:alekseypopkov/dso_test.git
+cp -rf ~/dso_test /opt/; rm -rf ~/dso_test
+
+# Startup service
+cd /opt/dso_test
+sudo docker run --rm --name dvna-mysql --env-file vars.env -d mysql:5.7
+sudo docker run -d --rm --name dvna-app --env-file vars.env --link dvna-mysql:mysql-db -p 9090:9090 appsecco/dvna
+
+exit
+```
+
+Данный скрип запускается с github Action: - останавливает запущенный сервис на сервере; удаляет предыдущую версию сервиса; разворачивает новую и запускает ее.
 
 
-3. Начнем с настройки GitHub Actions. Для автоматического запуска при каждой команде push, в директории ./github/workflows, создан файл deploy.yml -  файлы конфигурации для GitHub Actions. Файл конфигурации запускает авторизацию на сервере с помощью пары ssh-ключей. Публичный ключ расположен на сервере в директории ./ssh. Приватный ключ помещен в "секрет" в настройках репозитория. В "секрет" помещены - адрес сервера, пользователь для авторизации, путь до Bash-скрипта. После успешной авторизации файл конфигурации запускает Bash-скрипт на сервере. Bash-скрипт выполняет весь процесс обновления приложения. Сайт доступен по адресу http://217.18.61.156:9090/
+3. После успешного завершения предыдущих шагов, преступаем к настройке github Action. Для автоматического запуска при каждой команде push, в директории ./github/workflows, создан файл deploy.yml -  файлы конфигурации для GitHub Actions.
+
+```bash
+name: Deploy-test-2
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            sh ${{ secrets.PATH_TO_SCRIPT }}
+```
+
+Файл конфигурации запускает авторизацию на сервере с помощью пары ssh-ключей. Публичный ключ расположен на сервере в директории ./ssh. Приватный ключ помещен в "секрет" в настройках репозитория. В "секрет" помещены - адрес сервера, пользователь для авторизации, путь до Bash-скрипта. После успешной авторизации файл конфигурации запускает Bash-скрипт на сервере. Bash-скрипт выполняет весь процесс обновления приложения. Сайт доступен по адресу http://217.18.61.156:9090/
 
 ### Этап 2. SAST
 
