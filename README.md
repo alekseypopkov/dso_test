@@ -39,7 +39,7 @@
 1. Для достижения цели использован CodeQL Action (codeql.yml) - Это действие запускает ведущий в отрасли механизм семантического анализа кода GitHub, CodeQL, для поиска уязвимостей в исходном коде репозитория. Затем он автоматическизагружает результаты на GitHub, чтобы их можно было отобразить на вкладке безопасности репозитория. CodeQL выполняет расширяемый набор запросов, разработанных сообществом и лабораторией безопасности GitHub для поиска распространенных уязвимостей.
 2. Резулютаты доступны на вкладке Security репозитория.
 <!---Для подробной версии-->
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=alekseypopkov)](https://github.com/anuraghazra/github-readme-stats)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=alekseypopkov)](git@github.com:alekseypopkov/dso_test.git)
 
 ### Этап 3. DAST
 
