@@ -273,7 +273,9 @@ category: "/language:${{matrix.language}}" -  используется в ком
 CodeQL автоматически загружает результаты на вкладку безопасности репозитория.
 
 2. Резулютаты доступны на вкладке Security репозитория.
-<!---Для подробной версии-->
+
+![alt text](https://github.com/alekseypopkov/dso_test/blob/main/png/2sast.png)
+
 
 ### Этап 3. DAST
 
