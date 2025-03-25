@@ -14,6 +14,7 @@ jobs:
     steps:
     - uses: kehoe/validate-configs-action@v1
         with:
+            depth: 0
             reporter: "json"
 
 
