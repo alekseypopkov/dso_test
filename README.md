@@ -485,7 +485,7 @@ secrets.GITLEAKS_LICENSE - Лицензия требуется только дл
 
 На представленном ниже скиншоте видно, что Действие отработало в штатном режиме - Утечек не обнаружено. Внизу обведен созданный артефакт - gitleaks-results.sarif.
 
-![alt text](https://github.com/alekseypopkov/dso_test/blob/main/png/2gitleaks-action.png.png)
+![alt text](https://github.com/alekseypopkov/dso_test/blob/main/png/2gitleaks-action.png)
 
 
 ### 2. Проверка конфигурации или образов.
