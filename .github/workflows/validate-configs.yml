@@ -15,4 +15,5 @@ jobs:
         - uses: kehoecj/validate-configs-action@v4.0.1
           with:
               depth: 0
+              path: reports/report-*.json
               reporter: "json"
