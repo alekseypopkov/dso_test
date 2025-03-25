@@ -304,6 +304,15 @@ jobs:
       with:
         category: "/language:${{matrix.language}}"
 ```
+В приведенной выше композиции рабочего процесса:
+
+Активируется при push возникновении или pull_request возникновении main в ветви, в которой все файлы изменились;
+Существует одно задание с именем analyze , которое будет выполняться в последней версии Ubuntu для языков из  matrix.language
+Определяет strategy javascript-typescript в качестве language.
+Действие github/codeql-action/init@v3 GitHub используется для инициализации CodeQL.
+Действие github/codeql-action/analyze@v3 GitHub выполняет анализ CodeQL.
+
+
 ##### Анализ полученных результатов
 
 CodeQL автоматически загружает результаты на вкладку безопасности репозитория.
