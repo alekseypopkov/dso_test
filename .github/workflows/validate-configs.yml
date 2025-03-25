@@ -13,9 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: kehoe/validate-configs-action@v1
-        with:
-            depth: 0
-            reporter: "json"
+      with:
+          reporter: "json"
 
 
 
