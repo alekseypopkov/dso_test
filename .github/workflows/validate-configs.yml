@@ -14,8 +14,8 @@ jobs:
     steps:
     - uses: kehoecj/validate-configs-action@v4.0.1
         with:
-          path: reports/report-*.json
-          reporter: "json"
+            path: reports/report-*.json
+            reporter: "json"
 
 
 
